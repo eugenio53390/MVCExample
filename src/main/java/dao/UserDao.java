@@ -22,7 +22,7 @@ import model.User;
  */
 public class UserDao extends DAO {
 	
-	private static final String SQL_INSERT = "INSERT INTO user (username, first_name, last_name, email, cellphone, birth_date, date_insert) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	private static final String SQL_INSERT = "INSERT INTO user (username, first_name, last_name, email, cellphone, birth_date, date_insert, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SQL_UPDATE = "UPDATE user SET date_access=? WHERE id=?";
 	private static final String SQL_DELETE = "DELETE user WHERE id=?";
 	private static final String SQL_GET_ALL = "SELECT * FROM user";
@@ -53,16 +53,17 @@ public class UserDao extends DAO {
 			ResultSet rs = st.executeQuery();
 			
 			while (rs.next()) {
-				User temp = new User();
-				temp.setId(rs.getInt("id"));
-				temp.setUsername(rs.getString("username"));
-				temp.setFirst_name(rs.getString("first_name"));
-				temp.setLast_name(rs.getString("last_name"));
-				temp.setEmail(rs.getString("email"));
-				temp.setCellphone(rs.getString("cellphone"));
-				temp.setBirth_date(rs.getDate("birth_date"));
-				temp.setDate_access(rs.getDate("date_access"));
-				temp.setDate_insert(rs.getDate("date_insert"));
+
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setFirst_name(rs.getString("first_name"));
+				user.setLast_name(rs.getString("last_name"));
+				user.setEmail(rs.getString("email"));
+				user.setCellphone(rs.getString("cellphone"));
+				user.setBirth_date(rs.getDate("birth_date"));
+				user.setDate_access(rs.getDate("date_access"));
+				user.setDate_insert(rs.getDate("date_insert"));
+				user.setPassword(rs.getString("password"));
 			}
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -94,6 +95,7 @@ public class UserDao extends DAO {
 				temp.setBirth_date(rs.getDate("birth_date"));
 				temp.setDate_access(rs.getDate("date_access"));
 				temp.setDate_insert(rs.getDate("date_insert"));
+				temp.setPassword(rs.getString("password"));
 				
 				listUsers.add(temp);
 			}
@@ -118,6 +120,7 @@ public class UserDao extends DAO {
 			preparedStatement.setString(5, user.getCellphone());
 			preparedStatement.setDate(6, new java.sql.Date(user.getBirth_date().getTime()));
 			preparedStatement.setDate(7, java.sql.Date.valueOf(LocalDate.now()));
+			preparedStatement.setString(8, user.getPassword());
 
 			System.out.println(preparedStatement);
 			

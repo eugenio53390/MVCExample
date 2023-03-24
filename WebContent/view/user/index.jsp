@@ -38,7 +38,7 @@
 					<td><%=user.getBirth_date() %></td>
 					<td><%=user.getDate_access() %></td>
 					<td><%=user.getDate_insert() %></td>
-					<td><a href="UsersEdit/?action=EDIT&id=<%=user.getId() %>">EDIT</a>&nbsp;<a href="UsersEdit/?action=DELETE&id=<%=user.getId() %>">DELETE</a></td>
+					<td><a href="UsersEdit?action=EDIT&id=<%=user.getId() %>">EDIT</a>&nbsp;<a href="UsersEdit?action=DELETE&id=<%=user.getId() %>">DELETE</a></td>
 				</tr>
 			<%}%>
 		</tbody>

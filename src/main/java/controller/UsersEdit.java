@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,7 +19,7 @@ import dao.UserDao;
 import model.User;
 
 /**
- * Servlet implementation class UsersIndex
+ * Servlet implementation class UsersEdit
  */
 @WebServlet("/UsersEdit")
 public class UsersEdit extends HttpServlet {
@@ -93,8 +94,39 @@ public class UsersEdit extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User user = new User();
+		
+		try {
+			String username = request.getParameter("username");
+			String first_name = request.getParameter("first_name");
+			String last_name = request.getParameter("last_name");
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String cellphone = request.getParameter("cellphone");
+			Date birth_date = new Date( request.getParameter("birth_date"));
+			
 
-		doGet(request, response);
+			user.setUsername(username);
+			user.setFirst_name(first_name);
+			user.setLast_name(last_name);
+			user.setEmail(email);
+			user.setPassword(password);
+			user.setCellphone(cellphone);
+			user.setBirth_date(birth_date);
+			
+			usersDao.insertUser(user);
+			
+			response.sendRedirect("index.html");
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+			request.setAttribute("user", user);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/edit.jsp");
+	        dispatcher.forward(request, response);
+		}
+		
+
 	}
 
 }
