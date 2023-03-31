@@ -21,11 +21,18 @@ public class BillRowDao extends DAO{
 	private static final String SQL_GET_BY_ID = "SELECT * FROM bill_row where id=?";
 	
 	private BillDao billDao;
+	private boolean loadEntity = false;
 
-	public BillRowDao(String xml) throws ClassNotFoundException, JDOMException, IOException, SQLException {
+	public BillRowDao(String xml, boolean loadEntity) throws ClassNotFoundException, JDOMException, IOException, SQLException {
 		super(xml);
 		
-		billDao = new BillDao(xml);
+		this.loadEntity = loadEntity;
+		
+		if(this.loadEntity) {
+			billDao = new BillDao(xml, this.loadEntity);
+		}
+
+
 
 	}
 	
@@ -38,7 +45,10 @@ public class BillRowDao extends DAO{
 		this.conn = this.getConnection();
 		
 		try {
-			billDao.setConnection(this.conn);
+			if(this.loadEntity) {
+				billDao.setConnection(this.conn);
+
+			}
 
 			
 			st = this.conn.prepareStatement(SQL_GET_ALL_BY_BILL_ID);
@@ -53,8 +63,10 @@ public class BillRowDao extends DAO{
 				temp.setDescription(rs.getString("description"));
 				temp.setNumber(rs.getInt("number"));
 
-				
-				temp.setBill(billDao.getById(bill_ID));
+				if(this.loadEntity) {
+					temp.setBill(billDao.getById(bill_ID));
+				}
+
 				
 				listBillRows.add(temp);
 			}
@@ -77,10 +89,13 @@ public class BillRowDao extends DAO{
 		Integer bill_id = null;
 
 		
-		this.conn = this.getConnection();
-		
 		try {
+			this.conn = this.getConnection();
+			
+			if(this.loadEntity) {
+				billDao.setConnection(this.conn);
 
+			}
 			
 			PreparedStatement st = this.conn.prepareStatement(SQL_GET_BY_ID);
 			
@@ -95,7 +110,10 @@ public class BillRowDao extends DAO{
 				row.setNumber(rs.getInt("number"));
 				bill_id = rs.getInt("bill_id");	
 				
-				row.setBill(this.billDao.getById(bill_id));
+				if(this.loadEntity) {
+					row.setBill(this.billDao.getById(bill_id));
+				}
+
 			}
 		}catch (Exception e) {
 			throw new Exception(e);

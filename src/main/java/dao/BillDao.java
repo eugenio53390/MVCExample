@@ -32,6 +32,8 @@ public class BillDao extends DAO {
 	
 	private UserDao userDao;
 	private BillRowDao rowsDao;
+	
+	private boolean loadEntity = false;
 
 	/**
 	 * @param xml
@@ -40,11 +42,14 @@ public class BillDao extends DAO {
 	 * @throws IOException
 	 * @throws SQLException
 	 */
-	public BillDao(String xml) throws ClassNotFoundException, JDOMException, IOException, SQLException {
+	public BillDao(String xml, boolean loadEntity) throws ClassNotFoundException, JDOMException, IOException, SQLException {
 		super(xml);
 		
 		userDao = new UserDao(xml);
-		rowsDao = new BillRowDao(xml);
+		
+		this.loadEntity = loadEntity;
+		
+		rowsDao = new BillRowDao(xml, this.loadEntity);
 
 	}
 	
@@ -54,9 +59,11 @@ public class BillDao extends DAO {
 		ResultSet rs = null;
 		Integer user_id = null;
 		
-		this.conn = this.getConnection();
+
 		
 		try {
+			this.conn = this.getConnection();
+			
 			userDao.setConnection(this.conn);
 			rowsDao.setConnection(this.conn);
 			
