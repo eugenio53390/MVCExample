@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div align="center">
-        <form action="UserEdit" method="post">
+        <form action="UsersEdit" method="post">
         	<input type="hidden" name="id" value="<%=user.getId() %>">
         
             <table style="width: 80%">

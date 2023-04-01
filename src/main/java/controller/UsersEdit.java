@@ -103,7 +103,7 @@ public class UsersEdit extends HttpServlet {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String cellphone = request.getParameter("cellphone");
-			Date birth_date = new Date( request.getParameter("birth_date"));
+			Date birth_date = new Date(request.getParameter("birth_date"));
 			
 
 			user.setUsername(username);
