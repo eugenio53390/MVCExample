@@ -27,7 +27,8 @@ public class UserDao extends DAO {
 	private static final String SQL_DELETE = "DELETE user WHERE id=?";
 	private static final String SQL_GET_ALL = "SELECT * FROM user";
 	private static final String SQL_GET_BY_ID = "SELECT * FROM user where id=?";
-
+	private static final String SQL_GET_BY_USER_AND_PASSWORD = "SELECT * FROM user where username=? and password=?";
+	
 	/**
 	 * @param xml
 	 * @throws ClassNotFoundException
@@ -40,12 +41,51 @@ public class UserDao extends DAO {
 
 	}
 	
+	public User getByUserAndPassword(String username, String password) throws Exception {
+		User user = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			this.conn = this.getConnection();
+			
+			st = this.conn.prepareStatement(SQL_GET_BY_USER_AND_PASSWORD);
+			
+			st.setString(1, username);
+			st.setString(2, password);
+			
+			rs = st.executeQuery();
+			
+			while (rs.next()) {
+				user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setFirst_name(rs.getString("first_name"));
+				user.setLast_name(rs.getString("last_name"));
+				user.setEmail(rs.getString("email"));
+				user.setCellphone(rs.getString("cellphone"));
+				user.setBirth_date(rs.getDate("birth_date"));
+				user.setDate_access(rs.getDate("date_access"));
+				user.setDate_insert(rs.getDate("date_insert"));
+				user.setPassword(rs.getString("password"));
+			}
+		}catch (Exception e) {
+			user = null;
+			
+			throw new Exception(e);
+		}finally {
+			this.conn.close();
+		}
+		
+		return user;
+	}
+	
 	public User getById(int id) throws Exception {
 		User user = new User();
 		
-		this.conn = this.getConnection();
-		
 		try {
+			this.conn = this.getConnection();
+			
 			PreparedStatement st = this.conn.prepareStatement(SQL_GET_BY_ID);
 			
 			st.setInt(1, id);

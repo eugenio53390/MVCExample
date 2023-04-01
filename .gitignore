@@ -18,3 +18,5 @@
 .classpath
 .project
 MVCExample.eml
+/WebContent/WEB-INF/dbcfg.xml
+/WebContent/WEB-INF/classes/
