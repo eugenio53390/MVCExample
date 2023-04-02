@@ -22,7 +22,7 @@ import dao.UserDao;
  * Servlet implementation class Login
  */
 @WebServlet("/login")
-public class Login extends Session {
+public class LoginController extends SessionController {
 	private static final long serialVersionUID = 1L;
 	
 	private UserDao usersDao = null;
@@ -30,7 +30,7 @@ public class Login extends Session {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public LoginController() {
         super();
 
     }
@@ -77,11 +77,10 @@ public class Login extends Session {
 
 				session.setAttribute("session_user", user);
 				
-				response.sendRedirect("index.html");
+				response.sendRedirect("home");
 			}else {
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/login/login.jsp");
-				dispatcher.forward(request, response);
+				response.sendRedirect("login");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

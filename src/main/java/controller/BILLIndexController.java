@@ -22,13 +22,14 @@ import model.Bill;
  * Servlet implementation class BILLIndex
  */
 @WebServlet("/BILLIndex")
-public class BILLIndex extends HttpServlet {
+public class BILLIndexController extends AuthorizedController {
 	private static final long serialVersionUID = 1L;
     BillDao billDao= null;
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BILLIndex() {
+    public BILLIndexController() {
         super();
         
     }
@@ -41,7 +42,7 @@ public class BILLIndex extends HttpServlet {
 		try {
 			billDao =new BillDao(getServletContext().getRealPath("/") + config.getServletContext().getInitParameter("config"), false);
 		} catch (ClassNotFoundException | JDOMException | IOException | SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
@@ -50,14 +51,20 @@ public class BILLIndex extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		try {
-			List<Bill> list=billDao.getAll();
-			request.setAttribute("bills", list);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("view/bill/billTable.jsp");
-	        dispatcher.forward(request, response);
+			super.doGet(request, response);
+			
+			if(this.isAuthorized) {
+				List<Bill> list=billDao.getAll();
+				request.setAttribute("bills", list);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("view/bill/billTable.jsp");
+		        dispatcher.forward(request, response);
+			}else {
+				response.sendRedirect("login");
+			}
+
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
+
 			e1.printStackTrace();
 		}		
 	}
@@ -66,8 +73,8 @@ public class BILLIndex extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		super.doPost(request, response);
 	}
 
 }

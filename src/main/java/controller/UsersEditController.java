@@ -22,18 +22,15 @@ import model.User;
  * Servlet implementation class UsersEdit
  */
 @WebServlet("/UsersEdit")
-public class UsersEdit extends HttpServlet {
+public class UsersEditController extends AuthorizedController {
 	private static final long serialVersionUID = 1L;
-	private static final String ACTION_DELETE = "DELETE";
-	private static final String ACTION_EDIT = "EDIT";
-	private static final String ACTION_INSERT = "INSERT";
 	
 	private UserDao usersDao = null;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UsersEdit() {
+    public UsersEditController() {
         super();
 
     }
@@ -58,34 +55,41 @@ public class UsersEdit extends HttpServlet {
 		User user = null;
 		
 		try {
-			int id = Integer.parseInt(request.getParameter("id"));
-			String action = request.getParameter("action");
+			super.doGet(request, response);
 			
-			if(ACTION_DELETE.equals(action)) {
-				usersDao.deleteUser(id);
+			if(this.isAuthorized) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				String action = request.getParameter("action");
 				
-				response.sendRedirect("UsersEdit");
-			}else if(ACTION_EDIT.equals(action)) {
-				user = usersDao.getById(id);
-				
-				request.setAttribute("user", user);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/edit.jsp");
-		        dispatcher.forward(request, response);
-			}else if(ACTION_INSERT.equals(action)) {
-				user = new User();
-				
-				request.setAttribute("user", user);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/edit.jsp");
-		        dispatcher.forward(request, response);
+				if(ACTION_DELETE.equals(action)) {
+					usersDao.deleteUser(id);
+					
+					response.sendRedirect("UsersEdit");
+				}else if(ACTION_EDIT.equals(action)) {
+					user = usersDao.getById(id);
+					
+					request.setAttribute("user", user);
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/edit.jsp");
+			        dispatcher.forward(request, response);
+				}else if(ACTION_INSERT.equals(action)) {
+					user = new User();
+					
+					request.setAttribute("user", user);
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/edit.jsp");
+			        dispatcher.forward(request, response);
+				}
+			}else {
+				response.sendRedirect("login");
 			}
+			
+
 			
 
 		}catch(Exception e) {
 			e.printStackTrace();
-			
-			response.sendRedirect("index.html");
+
 		}
 
 	}
@@ -97,26 +101,34 @@ public class UsersEdit extends HttpServlet {
 		User user = new User();
 		
 		try {
-			String username = request.getParameter("username");
-			String first_name = request.getParameter("first_name");
-			String last_name = request.getParameter("last_name");
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-			String cellphone = request.getParameter("cellphone");
-			Date birth_date = new Date(request.getParameter("birth_date"));
+			super.doPost(request, response);
 			
+			if(this.isAuthorized) {
+				
+				String username = request.getParameter("username");
+				String first_name = request.getParameter("first_name");
+				String last_name = request.getParameter("last_name");
+				String email = request.getParameter("email");
+				String password = request.getParameter("password");
+				String cellphone = request.getParameter("cellphone");
+				Date birth_date = new Date(request.getParameter("birth_date"));
+				
 
-			user.setUsername(username);
-			user.setFirst_name(first_name);
-			user.setLast_name(last_name);
-			user.setEmail(email);
-			user.setPassword(password);
-			user.setCellphone(cellphone);
-			user.setBirth_date(birth_date);
-			
-			usersDao.insertUser(user);
-			
-			response.sendRedirect("index.html");
+				user.setUsername(username);
+				user.setFirst_name(first_name);
+				user.setLast_name(last_name);
+				user.setEmail(email);
+				user.setPassword(password);
+				user.setCellphone(cellphone);
+				user.setBirth_date(birth_date);
+				
+				usersDao.insertUser(user);
+				
+				response.sendRedirect("UsersIndex");
+			}else {
+				response.sendRedirect("login");
+			}
+
 		}catch(Exception e) {
 			e.printStackTrace();
 			

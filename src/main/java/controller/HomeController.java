@@ -2,59 +2,61 @@ package controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.UserDao;
-
 /**
- * Servlet implementation class Session
+ * Servlet implementation class HomeController
  */
-@WebServlet("/Session")
-public class Session extends HttpServlet {
+@WebServlet("/home")
+public class HomeController extends AuthorizedController {
 	private static final long serialVersionUID = 1L;
-	
-	private static final String ACTION_DELETE = "DELETE";
-	private static final String ACTION_EDIT = "EDIT";
-	private static final String ACTION_INSERT = "INSERT";
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * @see AuthorizedController#AuthorizedController()
      */
-    public Session() {
+    public HomeController() {
         super();
 
     }
-    
+
 	/**
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		try {
-			super.init(config);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		super.init(config);
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		super.doGet(request, response);
+		
+		if(this.isAuthorized) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("view/home/home.jsp");
+	        dispatcher.forward(request, response);
+		}else {
+			response.sendRedirect("login");
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		super.doPost(request, response);
+		
+		if(this.isAuthorized) {
+			
+		}else {
+			response.sendRedirect("login");
+		}
 	}
 
 }

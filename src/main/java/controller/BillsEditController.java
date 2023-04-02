@@ -21,11 +21,8 @@ import model.Bill;
  * Servlet implementation class UsersIndex
  */
 @WebServlet("/Bills Edit")
-public class BillsEdit extends HttpServlet {
+public class BillsEditController extends AuthorizedController {
 	private static final long serialVersionUID = 1L;
-	private static final String ACTION_DELETE = "DELETE";
-	private static final String ACTION_EDIT = "EDIT";
-	private static final String ACTION_INSERT = "INSERT";
 
 	
 	private BillDao billDao = null;
@@ -33,7 +30,7 @@ public class BillsEdit extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BillsEdit() {
+    public BillsEditController() {
         super();
 
     }
@@ -58,34 +55,41 @@ public class BillsEdit extends HttpServlet {
 		Bill bill = null;
 		
 		try {
-			int id = Integer.parseInt(request.getParameter("id"));
-			String action = request.getParameter("action");
+			super.doGet(request, response);
 			
-			if(ACTION_DELETE.equals(action)) {
-				billDao.deleteBill(id);
+			if(this.isAuthorized) {
+				int id = Integer.parseInt(request.getParameter("id"));
+				String action = request.getParameter("action");
 				
-				response.sendRedirect("billDao");
-			}else if(ACTION_EDIT.equals(action)) {
-				bill = billDao.getById(id);
-				
-				request.setAttribute("bill", bill);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/bill/edit.jsp");
-		        dispatcher.forward(request, response);
-			}else if(ACTION_INSERT.equals(action)) {
-				bill = new Bill();
-				
-				request.setAttribute("bill", bill);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/bill/edit.jsp");
-		        dispatcher.forward(request, response);
+				if(ACTION_DELETE.equals(action)) {
+					billDao.deleteBill(id);
+					
+					response.sendRedirect("billDao");
+				}else if(ACTION_EDIT.equals(action)) {
+					bill = billDao.getById(id);
+					
+					request.setAttribute("bill", bill);
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("view/bill/edit.jsp");
+			        dispatcher.forward(request, response);
+				}else if(ACTION_INSERT.equals(action)) {
+					bill = new Bill();
+					
+					request.setAttribute("bill", bill);
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("view/bill/edit.jsp");
+			        dispatcher.forward(request, response);
+				}
+			}else {
+				response.sendRedirect("login");
 			}
+			
+
 			
 
 		}catch(Exception e) {
 			e.printStackTrace();
-			
-			response.sendRedirect("index.html");
+
 		}
 
 	}
@@ -95,7 +99,7 @@ public class BillsEdit extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		doGet(request, response);
+		super.doPost(request, response);
 	}
 
 }

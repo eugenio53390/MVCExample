@@ -21,7 +21,7 @@ import model.User;
  * Servlet implementation class UsersIndex
  */
 @WebServlet("/UsersIndex")
-public class UsersIndex extends HttpServlet {
+public class UsersIndexController extends AuthorizedController {
 	private static final long serialVersionUID = 1L;
 	
 	private UserDao usersDao = null;
@@ -29,7 +29,7 @@ public class UsersIndex extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UsersIndex() {
+    public UsersIndexController() {
         super();
 
     }
@@ -53,16 +53,23 @@ public class UsersIndex extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			List<User> listUsers = usersDao.getAll();
+			super.doGet(request, response);
 			
-			request.setAttribute("users", listUsers);
+			if(this.isAuthorized) {
+				List<User> listUsers = usersDao.getAll();
+				
+				request.setAttribute("users", listUsers);
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/index.jsp");
+		        dispatcher.forward(request, response);
+			}else {
+				response.sendRedirect("login");
+			}
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/index.jsp");
-	        dispatcher.forward(request, response);
+
 		}catch(Exception e) {
 			e.printStackTrace();
-			
-			response.sendRedirect("index.html");
+
 		}
 
 	}
@@ -72,7 +79,7 @@ public class UsersIndex extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		doGet(request, response);
+		super.doPost(request, response);
 	}
 
 }

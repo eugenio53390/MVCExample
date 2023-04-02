@@ -102,8 +102,7 @@ public class User implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		encrypt(password);
-		this.password = password;
+		this.password = encrypt(password);
 	}
 	
 	private static String encrypt(String password) {
