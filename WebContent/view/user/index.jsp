@@ -13,7 +13,7 @@
 </head>
 <body>
 	<table>
-		<thead>
+		<thead><a href="UsersEdit?action=INSERT">INSERT</a>&nbsp;<a href="home">HOME</a>
 			<tr>
 				<th>username</th>
 				<th>first_name</th>

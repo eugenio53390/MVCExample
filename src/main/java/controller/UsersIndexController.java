@@ -51,17 +51,37 @@ public class UsersIndexController extends AuthorizedController {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String action = null;
+		int id = 0;
+		User user = null;
+		
+		
 		try {
 			super.doGet(request, response);
 			
+			action = request.getParameter("action");
+			
+			if(request.getParameter("id") != null && !request.getParameter("id").isEmpty() ) {
+				id = Integer.parseInt(request.getParameter("id"));
+			}
+
+			
 			if(this.isAuthorized) {
-				List<User> listUsers = usersDao.getAll();
+
 				
-				request.setAttribute("users", listUsers);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/index.jsp");
-		        dispatcher.forward(request, response);
+				if(ACTION_DELETE.equals(action)) {
+					usersDao.deleteUser(id);
+					
+					response.sendRedirect("UsersIndex");
+				}else {
+					List<User> listUsers = usersDao.getAll();
+					
+					request.setAttribute("users", listUsers);
+					
+					RequestDispatcher dispatcher = request.getRequestDispatcher("view/user/index.jsp");
+			        dispatcher.forward(request, response);
+				}
+
 			}else {
 				response.sendRedirect("login");
 			}

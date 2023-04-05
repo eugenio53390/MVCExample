@@ -68,10 +68,6 @@ public class DAO {
 
 		Class.forName(this.cfg.getDriver());// leggo driver
 
-		System.out.println("Driver Load: " + this.cfg.getDriver());
-
-		System.out.println(cfg.getDbUrl() + " " + this.cfg.getUser() + " " + this.cfg.getPassword());
-
 		return DriverManager.getConnection(this.cfg.getDbUrl(), this.cfg.getUser(), this.cfg.getPassword());
 	}
 	

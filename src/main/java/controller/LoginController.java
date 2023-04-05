@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import model.*;
+import utils.StringUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -67,7 +68,7 @@ public class LoginController extends SessionController {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			
-			String password = request.getParameter("password");
+			String password = StringUtils.encrypt(request.getParameter("password"));
 			String username = request.getParameter("username");
 			
 			User user = usersDao.getByUserAndPassword(username, password);
@@ -76,6 +77,8 @@ public class LoginController extends SessionController {
 				HttpSession session = request.getSession();
 
 				session.setAttribute("session_user", user);
+				
+				usersDao.updateUser4DateAccess(user);
 				
 				response.sendRedirect("home");
 			}else {

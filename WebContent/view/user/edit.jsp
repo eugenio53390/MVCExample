@@ -11,7 +11,7 @@
 <title>Edit User</title>
 </head>
 <body>
-	<div align="center">
+	<div align="center"><a href="UsersIndex">LISTA UTENTI</a>
         <form action="UsersEdit" method="post">
         	<input type="hidden" name="id" value="<%=user.getId() %>">
         
