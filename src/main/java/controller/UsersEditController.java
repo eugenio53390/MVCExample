@@ -92,6 +92,7 @@ public class UsersEditController extends AuthorizedController {
 					user.setLast_name("");
 					user.setPassword("");
 					user.setUsername("");
+					user.setRole("");
 					user.setId(0);
 					
 					request.setAttribute("user", user);
@@ -131,6 +132,7 @@ public class UsersEditController extends AuthorizedController {
 				String email = request.getParameter("email");
 				String password = request.getParameter("password");
 				String cellphone = request.getParameter("cellphone");
+				String role = request.getParameter("role");
 				Date birth_date = date;
 				
 
@@ -138,7 +140,7 @@ public class UsersEditController extends AuthorizedController {
 				user.setFirst_name(first_name);
 				user.setLast_name(last_name);
 				user.setEmail(email);
-
+				user.setRole(role);
 				user.setCellphone(cellphone);
 				user.setBirth_date(birth_date);
 				

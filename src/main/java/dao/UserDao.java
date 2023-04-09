@@ -22,7 +22,7 @@ import model.User;
  */
 public class UserDao extends DAO {
 	
-	private static final String SQL_INSERT = "INSERT INTO user (username, first_name, last_name, email, cellphone, birth_date, date_insert, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String SQL_INSERT = "INSERT INTO user (username, first_name, last_name, email, cellphone, birth_date, date_insert, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String SQL_UPDATE_DATE_ACCESS = "UPDATE user SET date_access=? WHERE id=?";
 	private static final String SQL_UPDATE = "UPDATE user SET username=?, first_name=?, last_name=?, email=?, cellphone=?, birth_date=?, password=? WHERE id=?";
 	private static final String SQL_DELETE = "DELETE FROM user WHERE id=?";
@@ -69,6 +69,7 @@ public class UserDao extends DAO {
 				user.setDate_access(rs.getDate("date_access"));
 				user.setDate_insert(rs.getDate("date_insert"));
 				user.setPassword(rs.getString("password"));
+				user.setRole(rs.getString("role"));
 			}
 		}catch (Exception e) {
 			user = null;
@@ -105,6 +106,7 @@ public class UserDao extends DAO {
 				user.setDate_access(rs.getDate("date_access"));
 				user.setDate_insert(rs.getDate("date_insert"));
 				user.setPassword(rs.getString("password"));
+				user.setRole(rs.getString("role"));
 			}
 		}catch (Exception e) {
 			throw new Exception(e);
@@ -137,6 +139,7 @@ public class UserDao extends DAO {
 				temp.setDate_access(rs.getDate("date_access"));
 				temp.setDate_insert(rs.getDate("date_insert"));
 				temp.setPassword(rs.getString("password"));
+				temp.setRole(rs.getString("role"));
 				
 				listUsers.add(temp);
 			}
@@ -162,7 +165,8 @@ public class UserDao extends DAO {
 			preparedStatement.setDate(6, new java.sql.Date(user.getBirth_date().getTime()));
 			preparedStatement.setDate(7, java.sql.Date.valueOf(LocalDate.now()));
 			preparedStatement.setString(8, user.getPassword());
-
+			preparedStatement.setString(9, user.getRole());
+			
 			System.out.println(preparedStatement);
 			
 			// Eseguo la query

@@ -16,7 +16,7 @@ import utils.*;
  */
 public class User implements Serializable {
 	
-	private String first_name, last_name, username, email, cellphone, password;
+	private String first_name, last_name, username, email, role, cellphone, password;
 	private Integer id;
 	private Date birth_date, date_access, date_insert;
 
@@ -105,6 +105,14 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 
