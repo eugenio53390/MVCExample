@@ -9,27 +9,14 @@
 <body class="h-100">
 <div class="container h-100">
 <main class="d-flex justify-content-center h-100 align-items-center">
-		<div class="card">
-			<div class="card-body p-4 p-md-5">
-				<form action="login" method="post" data-bitwarden-watching="1">
-					<h1 class="text-center">Login</h1>
-
-					<div class="mb-3">
-						<label for="username" class="form-label">Username</label>
-						<input type="text" class="form-control" required autofocus name="username" id="username" placeholder="">
-					</div>
-
-					<div class="mb-3">
-						<label for="password" class="form-label">Password</label>
-						<input type="password" class="form-control" required name="password" id="password" placeholder="">
-					</div>
-					<p class="text-danger text-center">
-											</p>
-					<button class="btn btn-primary w-100">
-						Accedi
-					</button>
-				</form>
-			</div>
+		<div class="card px-4 py-5 my-5 text-center">
+			<h1 class="display-5 fw-bold text-body-emphasis">Gestionale scolastico</h1>
+			<div class="col-lg-6 mx-auto">
+		      <p class="lead mb-4">Gestionale scolastico sviluppato in collaborazione tra la 5AIA e la 5BIA per il corso "Tecnologie e Progettazione di Sistemi Informatici e Telecomunicazioni".</p>
+		      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+		        <a href="login"><button type="button" class="btn btn-primary btn-lg px-4 gap-3">Log In</button></a>
+		      </div>
+		    </div>
 		</div>
 	</main>
 </div>
