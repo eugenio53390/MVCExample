@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD `role` VARCHAR(25) NOT NULL AFTER `password`;
