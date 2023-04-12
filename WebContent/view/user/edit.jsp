@@ -50,7 +50,11 @@
                 </tr>
                 <tr>
                     <td>Date insert</td>
-                    <td><input type="date" name="date_insert" readonly="readonly" value="<%=user.getDate_insert() %>"/></td>
+                    <td><input type="date" name="date_insert" value="<%=user.getDate_insert() %>"/></td>
+                </tr>
+                <tr>
+                    <td>Role</td>
+                    <td><input type="text" name="role" value="<%=user.getRole() %>"/></td>
                 </tr>
             </table>
             <input type="submit" value="Submit" />

@@ -15,5 +15,44 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-ru.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-util-scan.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-zh-CN.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/jaspic-api.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/websocket-api.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/catalina-ssi.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-pt-BR.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-jni.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-cs.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/jakartaee-migration-1.0.6-shaded.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/ecj-4.26.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/catalina-storeconfig.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-de.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-websocket.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/tomcat-i18n-ko.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/websocket-client-api.jar"/>
+	<classpathentry kind="lib" path="/opt/homebrew/Cellar/tomcat/10.1.5/libexec/lib/servlet-api.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="https://jakarta.ee/specifications/servlet/6.0/apidocs/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/branda/Downloads/jdom-2.0.6.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
