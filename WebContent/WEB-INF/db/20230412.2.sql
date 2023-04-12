@@ -1,0 +1,1 @@
+ALTER TABLE example.`user` MODIFY COLUMN date_access datetime NULL;
