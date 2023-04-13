@@ -15,7 +15,7 @@
 </head>
 <body class="p-5">
 	<a href="UsersIndex"><button type="button" class="btn btn-warning mr-3">TORNA ALLA LISTA</button></a>
-  	<h1 class="fw-bold mt-3"><span class="text-primary">MODIFICA</span> UTENTE</h1>
+  	<h1 class="fw-bold mt-3"><span class="text-primary">MODIFICA/AGGIUNGI</span> UTENTE</h1>
     
     <form action="UsersEdit" method="post">
   <div class="mb-3">

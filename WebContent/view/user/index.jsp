@@ -50,7 +50,23 @@
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
-      <br>	
+      <br>
+        <h4>visualizza solo ruolo:</h4>
+      <form class="mb-4">
+  <div class="mb-3 row">
+  	<div class="col-md-4">
+  		 <select class="form-select" aria-label="Default select example">
+  			<option selected>tutti</option>
+  			<option value="1">studente</option>
+  			<option value="2">docente</option>
+ 			 <option value="3">segreteria</option>
+		</select>
+ 	</div>
+	<div class="col-md-1">
+		<button type="submit" class="btn btn-primary">applica</button>
+	</div>
+  </div>
+</form>
 
 	
   <table class="table">
